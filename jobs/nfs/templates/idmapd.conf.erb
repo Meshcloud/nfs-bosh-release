@@ -1,0 +1,11 @@
+[General]
+
+Verbosity = 0
+Pipefs-Directory = /run/rpc_pipefs
+# set your own domain here, if id differs from FQDN minus hostname
+Domain = <%= link('nfs').instances.first.address %>
+
+[Mapping]
+
+Nobody-User = nobody
+Nobody-Group = nogroup

@@ -1,0 +1,9 @@
+name: nfs
+version: 0+dev.8
+commit_hash: non-git
+uncommitted_changes: false
+jobs:
+- name: nfs
+  version: 90d56d67e9e17290a13aa8586f1f4567c358fc26
+  fingerprint: 90d56d67e9e17290a13aa8586f1f4567c358fc26
+  sha1: ad26511440de492ccb2d5e3217ffdc8e9bbd7066

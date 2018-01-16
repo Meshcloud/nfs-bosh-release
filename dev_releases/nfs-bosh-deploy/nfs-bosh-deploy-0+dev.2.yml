@@ -1,0 +1,9 @@
+name: nfs-bosh-deploy
+version: 0+dev.2
+commit_hash: non-git
+uncommitted_changes: false
+jobs:
+- name: nfs
+  version: eda9c4e23e099bc9662c683a3af9f1db05c68e08
+  fingerprint: eda9c4e23e099bc9662c683a3af9f1db05c68e08
+  sha1: db5e8027bb8820deb8cff983cc2d47122f9e6cc8

@@ -1,0 +1,20 @@
+---
+name: nfs
+
+templates:
+  bin/pre-start.sh.erb: bin/pre-start
+  idmapd.conf.erb: idmapd.conf
+  exports: exports
+packages: []
+
+provides:
+  - name: nfs
+    type: storage
+
+consumes:
+  - name: nfs
+    type: storage
+
+properties: 
+  nfs.network:
+    description: "Information about the private Network of the VMs. E.G. 192.168.1.0/24"  

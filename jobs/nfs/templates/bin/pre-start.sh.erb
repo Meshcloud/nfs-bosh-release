@@ -1,0 +1,29 @@
+#!/bin/bash 
+set -x
+#Variable Setup
+STORAGEPATH="/var/vcap/store/nfs"
+USERNAME=$(cat /proc/sys/kernel/random/uuid | sed -e 's/-//g')
+PASSWD=$(cat /proc/sys/kernel/random/uuid | sed -e 's/-//g')
+BOSHDIR="/var/vcap/jobs/nfs/"
+#Install Required Package
+apt-get install nfs-kernel-server -y
+#User and Directory Setup
+#Create User 
+sudo useradd -d /home/$USERNAME -m $USERNAME
+echo -e "$PASSWD\n$PASSWD" | passwd $USERNAME
+#Create Directory and set Permissions 
+mkdir -p $STORAGEPATH
+chown $USERNAME $STORAGEPATH
+chmod -R 700 $STORAGEPATH 
+#mounting storage Path to users home Directory and persiting it  
+mount --bind /home/$USERNAME $STORAGEPATH
+echo "/home/$USERNAME $STORAGEPATH none bind 0 0" | tee -a /etc/fstab
+#set idmapd.conf 
+mv "$BOSHDIR/idmapd.conf" "/etc/idmapd.conf"
+#export NFS Table 
+mv "$BOSHDIR/exports" "/etc/exports"
+sudo exportfs -a
+sudo service nfs-kernel-server start
+#responding success to the start-script
+echo "done" | tee "/home/vcap/.status"
+exit 0
